@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyTrack.Api", "MoneyTrack.Api\MoneyTrack.Api.csproj", "{928BEA07-DD98-41CB-873E-3DEB901A925C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyTrack.Application", "MoneyTrack.Application\MoneyTrack.Application.csproj", "{5535F498-7436-44E2-868D-3962EDEDB88F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyTrack.Domain", "MoneyTrack.Domain\MoneyTrack.Domain.csproj", "{65666DE5-298C-4903-A577-3C5ED94AFB49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyTrack.Infrastructure", "MoneyTrack.Infrastructure\MoneyTrack.Infrastructure.csproj", "{A9143226-80BE-495E-8652-58F78766A42E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyTrack.Tests", "MoneyTrack.Tests\MoneyTrack.Tests.csproj", "{14D53101-8708-4773-BF7C-2A10A75618C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{928BEA07-DD98-41CB-873E-3DEB901A925C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{928BEA07-DD98-41CB-873E-3DEB901A925C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{928BEA07-DD98-41CB-873E-3DEB901A925C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{928BEA07-DD98-41CB-873E-3DEB901A925C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5535F498-7436-44E2-868D-3962EDEDB88F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5535F498-7436-44E2-868D-3962EDEDB88F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5535F498-7436-44E2-868D-3962EDEDB88F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5535F498-7436-44E2-868D-3962EDEDB88F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65666DE5-298C-4903-A577-3C5ED94AFB49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65666DE5-298C-4903-A577-3C5ED94AFB49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65666DE5-298C-4903-A577-3C5ED94AFB49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65666DE5-298C-4903-A577-3C5ED94AFB49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9143226-80BE-495E-8652-58F78766A42E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9143226-80BE-495E-8652-58F78766A42E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9143226-80BE-495E-8652-58F78766A42E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9143226-80BE-495E-8652-58F78766A42E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14D53101-8708-4773-BF7C-2A10A75618C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14D53101-8708-4773-BF7C-2A10A75618C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14D53101-8708-4773-BF7C-2A10A75618C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14D53101-8708-4773-BF7C-2A10A75618C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

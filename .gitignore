@@ -1,0 +1,11 @@
+﻿.env
+.env.*
+!.env.example
+node_modules/
+.expo/
+coverage/
+bin/
+obj/
+*.user
+*.pfx
+*.keystore
