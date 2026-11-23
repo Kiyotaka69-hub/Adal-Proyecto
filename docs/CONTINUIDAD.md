@@ -6,3 +6,5 @@ Variables previstas: ConnectionStrings__DefaultConnection, Jwt__Key, Jwt__Issuer
 Actualización: Git instalado, rama local desarrollo/moneytrack, planificación en d46ed52. Push pendiente de autenticación. Fase 1 iniciada. Verificar instalación del SDK .NET y generar los proyectos.
 
 Fase 1 validada. Desde backend ejecutar dotnet build y dotnet test. Desde frontend npm ci, npx tsc --noEmit y npx eslint app components constants. Próxima tarea: crear entidades y migraciones, y habilitar SQL Server de prueba. Rama desarrollo/moneytrack publicada.
+
+Fase 2 en curso: seis entidades, MoneyTrackContext, migración Inicial y script idempotente generados. Ver docs/BASE_DE_DATOS.md. Siguiente paso: aplicar a una instancia de desarrollo autorizada, ejecutar pruebas de restricciones y preparar seeds. localhost dio error 40, sin servicio MSSQLSERVER detectado. Fase 1 publicada en ecf10b9.

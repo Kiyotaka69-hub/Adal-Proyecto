@@ -8,3 +8,5 @@
 - Iniciada la estructura del repositorio con README, exclusiones de secretos y plantilla de entorno.
 
 - Solución .NET 8 con cinco proyectos y frontend Expo Router con Axios, SecureStore y correcciones de TypeScript y ESLint.
+
+- Incorporado esquema SQL Server versionado por EF Core con claves de propietario, controles de importe y periodo e índices.
