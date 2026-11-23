@@ -1,4 +1,4 @@
-﻿"""Prueba HTTPS exclusivamente contra el servidor local de integración."""
+"""Prueba HTTPS exclusivamente contra el servidor local de integración."""
 import json
 import secrets
 import ssl
@@ -59,6 +59,19 @@ def run():
     page = request("GET", f"movimientos?idCategoria={cid}&tipo=Gasto&desde=2026-11-01&hasta=2026-11-30&tamano=1", 200, token=a)
     assert page["total"] == 1 and page["items"][0]["cantidad"] == 30
     assert request("GET","movimientos",200,token=b)["total"] == 0
+    period = "?mes=11&anio=2026"
+    budget = {"idCategoria":cid, "mes":11, "anio":2026, "limite":100}
+    bid = request("POST","presupuestos",201,budget,a)["idPresupuesto"]
+    request("POST","presupuestos",409,budget,a)
+    request("PUT",f"presupuestos/{bid}",404,budget | {"idCategoria":cid},b)
+    request("PUT",f"presupuestos/{bid}",200,budget | {"limite":90},a)
+    assert request("GET","presupuestos"+period,200,token=a)[0]["gastado"] == 30
+    assert request("GET","presupuestos"+period,200,token=b) == []
+    summary = request("GET","dashboard/resumen"+period,200,token=a)
+    assert (summary["saldo"],summary["ingresos"],summary["gastos"]) == (-30,0,30)
+    assert request("GET","dashboard/estadisticas"+period,200,token=a)[0]["total"] == 30
+    request("DELETE",f"presupuestos/{bid}",404,token=b)
+    request("DELETE",f"presupuestos/{bid}",204,token=a)
     request("DELETE",movement,204,token=a)
     request("DELETE",category,204,token=a)
     print("OK: sesión, categorías, movimientos, filtros y aislamiento de dos cuentas.")

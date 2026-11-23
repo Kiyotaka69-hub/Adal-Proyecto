@@ -26,6 +26,8 @@ builder.Services.AddRateLimiter(o =>
 builder.Services.AddExceptionHandler<FinanzasErrors>();
 builder.Services.AddScoped<IFinanzasRepository, FinanzasRepository>();
 builder.Services.AddScoped<FinanzasService>();
+builder.Services.AddScoped<IResumenRepository,ResumenRepository>();
+builder.Services.AddScoped<PresupuestosService>();
 builder.Services.AddProblemDetails();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
