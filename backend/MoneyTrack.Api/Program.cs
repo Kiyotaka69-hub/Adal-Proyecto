@@ -15,7 +15,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 {
     o.MapInboundClaims = false;
     o.TokenValidationParameters = tokens.Validation;
+    o.Events=new JwtBearerEvents
+    {
+        OnTokenValidated=async context =>
+        {
+            var sub=context.Principal?.FindFirst("sub")?.Value;
+            var rol=context.Principal?.FindFirst("role")?.Value;
+            if(!int.TryParse(sub,out var id) ||
+                (await context.HttpContext.RequestServices.GetRequiredService<IUsuarios>().Buscar(id,context.HttpContext.RequestAborted))?.Rol!=rol)
+                context.Fail("Sesión inválida.");
+        }
+    };
 });
+builder.Services.AddScoped<IAdministracionRepository,AdministracionRepository>();
+builder.Services.AddScoped<AdministracionService>();
 builder.Services.AddAuthorization();
 builder.Services.AddRateLimiter(o =>
 {
