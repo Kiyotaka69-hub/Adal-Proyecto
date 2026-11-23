@@ -12,3 +12,5 @@
 - Incorporado esquema SQL Server versionado por EF Core con claves de propietario, controles de importe y periodo e índices.
 
 - Validada la migración inicial sobre SQL Server Express LocalDB con pruebas transaccionales de integridad.
+
+- API de sesión, categorías y movimientos verificada con dos cuentas en SQL Server.
