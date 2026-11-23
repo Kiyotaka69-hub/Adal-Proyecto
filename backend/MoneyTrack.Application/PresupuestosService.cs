@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using MoneyTrack.Domain;
 namespace MoneyTrack.Application;
 
@@ -28,6 +28,18 @@ public sealed class PresupuestosService(IResumenRepository resumen,IFinanzasRepo
         if(!id.HasValue) finanzas.Agregar(presupuesto);
         await finanzas.Guardar(ct);
         return presupuesto;
+    }
+    public async Task<Presupuesto> AplicarSugerencia(int usuario,int categoria,DateOnly periodo,decimal montoConfirmado,PrediccionService predicciones,CancellationToken ct)
+    {
+        var filas=await predicciones.Predecir(usuario,periodo,ct);
+        var fila=filas.SingleOrDefault(x=>x.IdCategoria==categoria) ?? throw new FinanzasException(404,"Categoría no encontrada.");
+        if(fila.Estimacion is not Estimacion e || e.Sugerido!=montoConfirmado || montoConfirmado<=0)
+            throw new FinanzasException(409,"Revisa la sugerencia actual antes de confirmar.");
+        var p=new Presupuesto { IdUsuario=usuario,IdCategoria=categoria,Mes=periodo.Month,Anio=periodo.Year,
+            Origen="IA",Limite=e.Sugerido,MontoSugerido=e.Sugerido };
+        finanzas.Agregar(p);
+        await finanzas.Guardar(ct);
+        return p;
     }
     private async Task<Presupuesto> Buscar(int u,int id,CancellationToken ct) =>
         await resumen.Buscar(u,id,ct) ?? throw new FinanzasException(404,"Presupuesto no encontrado.");

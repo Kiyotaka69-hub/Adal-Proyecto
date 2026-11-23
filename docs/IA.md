@@ -1,0 +1,6 @@
+﻿# Asistente local
+Para un periodo se consultan los doce meses anteriores. Cada mes con gastos recibe un peso de 1 a 12, mayor para meses recientes. Los meses sin registros se consideran desconocidos. Las categorías sin observaciones se devuelven sin estimación. Con cuatro observaciones o más, el cálculo limita cada total a tres veces la mediana. Añade la pendiente entre el primer y último mes observado, acotada al 25% de la media. El resultado se redondea a centavos. La sugerencia agrega un margen del 5%. Estos parámetros son heurísticos.
+ 
+La confianza combina la fracción de meses observados y la desviación absoluta media respecto a la mediana. No es una probabilidad calibrada. La alerta compara el gasto observado o estimado con el límite del periodo. El chat local admite consultas de saldo, ingresos, gastos y predicciones. Conserva el intercambio por usuario; el historial devuelve los últimos 50 mensajes. El modo local no transmite datos a terceros.
+
+Consultar GET /api/asistente/prediccion?mes=12&anio=2026 o POST /api/presupuestos/sugerencia con mes y anio. Confirmar en POST /api/presupuestos/sugerencia/confirmar con mes, anio, idCategoria, montoConfirmado y confirmado=true. Una cifra desactualizada o un presupuesto existente devuelve 409. El chat usa GET y POST /api/asistente/chat; POST requiere mensaje, mes y anio.

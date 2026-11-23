@@ -72,7 +72,29 @@ def run():
     assert request("GET","dashboard/estadisticas"+period,200,token=a)[0]["total"] == 30
     request("DELETE",f"presupuestos/{bid}",404,token=b)
     request("DELETE",f"presupuestos/{bid}",204,token=a)
+    target = {"mes":12,"anio":2026}
+    next_month = "?mes=12&anio=2026"
+    prediction = request("GET","asistente/prediccion"+next_month,200,token=a)
+    assert prediction["categorias"][0]["estimacion"]["monto"] == 30
+    assert request("GET","asistente/prediccion"+period,200,token=a)["categorias"][0]["estimacion"] is None
+    assert request("GET","asistente/prediccion"+next_month,200,token=b)["categorias"] == []
+    suggestions = request("POST","presupuestos/sugerencia",200,target,a)
+    assert suggestions["requiereConfirmacion"] and suggestions["categorias"][0]["estimacion"]["sugerido"] == 31.5
+    answer = request("POST","asistente/chat",200,{"mensaje":"gastos", "mes":11,"anio":2026},a)
+    assert "30.00" in answer["respuesta"]
+    assert len(request("GET","asistente/chat",200,token=a))==2
+    assert request("GET","asistente/chat",200,token=b)==[]
+    assert request("GET","presupuestos"+next_month,200,token=a)==[]
+    confirm = {**target,"idCategoria":cid,"montoConfirmado":31.5,"confirmado":False}
+    route = "presupuestos/sugerencia/confirmar"
+    request("POST",route,400,confirm,a)
+    request("POST",route,409,{**confirm,"confirmado":True,"montoConfirmado":29},a)
+    applied=request("POST",route,201,{**confirm,"confirmado":True},a)
+    assert applied["origen"]=="IA" and applied["limite"]==31.5
+    request("POST",route,409,{**confirm,"confirmado":True},a)
+    request("DELETE",f"presupuestos/{applied['idPresupuesto']}",204,token=a)
     request("DELETE",movement,204,token=a)
+    request("GET","asistente/prediccion"+next_month,200,token=a)
     request("DELETE",category,204,token=a)
     print("OK: sesión, categorías, movimientos, filtros y aislamiento de dos cuentas.")
 

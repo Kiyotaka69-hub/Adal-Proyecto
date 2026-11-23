@@ -28,6 +28,8 @@ builder.Services.AddScoped<IFinanzasRepository, FinanzasRepository>();
 builder.Services.AddScoped<FinanzasService>();
 builder.Services.AddScoped<IResumenRepository,ResumenRepository>();
 builder.Services.AddScoped<PresupuestosService>();
+builder.Services.AddScoped<IPrediccionRepository,PrediccionRepository>();
+builder.Services.AddScoped<PrediccionService>();
 builder.Services.AddProblemDetails();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
