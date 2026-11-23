@@ -1,31 +1,10 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
-
-export default function TabTwoScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
-    </View>
-  );
+import { useState } from 'react';
+import { Text } from 'react-native';
+import { Accion, Pantalla } from '@/components/Pantalla';
+import { mensaje,salir,useSesion } from '@/lib/sesion';
+export default function Perfil(){
+  const {perfil}=useSesion();const [error,setError]=useState('');
+  return <Pantalla titulo={perfil?.nombre ?? 'Perfil'}><Text>{perfil?.correo}</Text><Text>{perfil?.rol}</Text>
+    {!!error && <Text accessibilityRole="alert">{error}</Text>}
+    <Accion titulo="Cerrar sesión" onPress={()=>{salir().catch(e=>setError(mensaje(e)));}}/></Pantalla>;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
